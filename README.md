@@ -79,7 +79,7 @@ Then usage of the widget is simple as:
 TTLiveAgentWidget *liveAgentWidget = [TTLiveAgentWidget sharedInstance];
 
 // Open widget
-[[TTLiveAgentWidget sharedInstance] open:self withStyle:Present];
+[[TTLiveAgentWidget sharedInstance] openFromController:self withStyle:Present];
 ```
 
 Configuration
@@ -113,7 +113,7 @@ Open widget from `controller` with style. Style can be either `TTLiveAgentWidget
 
 ##### - (void)openFromController:(UIViewController *) controller forKeyword:(NSString *) keyword withStyle:(TTLiveAgentWidgetStyle) style;
 
-Open knowledgebase articles directly. If `keyword` is not contained in widget's topics then widget will be opened same way as with `open(fromController controller: UIViewController, style: Int)`.
+Open knowledgebase articles directly. If `keyword` is not contained in widget's topics then widget will be opened same way as with `- (void)openFromController:(UIViewController *) controller forKeyword:(NSString *) keyword withStyle:(TTLiveAgentWidgetStyle) style`.
 
 ##### - (void)updateArticles:(void (^)())onSuccess :(void (^)())onError;
 
