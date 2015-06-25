@@ -1,0 +1,5 @@
+
+target 'TTLiveAgentWidgetObjCExample', :exclusive => true do
+  pod "TTLiveAgentWidget-ObjectiveC", :path => '../'
+end
+

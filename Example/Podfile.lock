@@ -1,0 +1,14 @@
+PODS:
+  - TTLiveAgentWidget-ObjectiveC (0.1.2)
+
+DEPENDENCIES:
+  - TTLiveAgentWidget-ObjectiveC (from `../`)
+
+EXTERNAL SOURCES:
+  TTLiveAgentWidget-ObjectiveC:
+    :path: ../
+
+SPEC CHECKSUMS:
+  TTLiveAgentWidget-ObjectiveC: 1d5e4a48bf3d41f4e877a899bd7213384b665c27
+
+COCOAPODS: 0.37.2
