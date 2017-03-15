@@ -13,6 +13,6 @@
 @property (nonatomic, assign) NSString *key;
 @property (nonatomic, assign) NSString *title;
 
-- (id)initWithKey:(NSString *)key :(NSString *)title;
+- (id)initWithKey:(NSString *)key title:(NSString *)title;
 
 @end

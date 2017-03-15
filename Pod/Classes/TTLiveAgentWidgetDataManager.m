@@ -25,7 +25,7 @@ NSString * const kArticlesKeyIdentifier = @"com.tappytaps.support.widget.article
     [[NSUserDefaults standardUserDefaults]setObject:articleMD5 forKey:kArticleMD5KeyIdentifier];
 }
 
-- (void)updateArticles:(void (^)())onSuccess :(void (^)())onError {
+- (void)updateArticlesOnSuccess:(void (^)())onSuccess onError:(void (^)())onError {
     
     if (!self.apiURL) {
         NSLog(@"TTLiveAgentWidget - API URL is missing. Can't request server.");

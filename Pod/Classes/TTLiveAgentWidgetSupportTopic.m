@@ -10,7 +10,7 @@
 
 @implementation TTLiveAgentWidgetSupportTopic
 
-- (id)initWithKey:(NSString *)key :(NSString *)title {
+- (id)initWithKey:(NSString *)key title:(NSString *)title {
     self = [super init];
     if (self) {
         _key = key;

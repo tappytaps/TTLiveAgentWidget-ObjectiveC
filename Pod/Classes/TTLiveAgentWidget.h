@@ -12,25 +12,16 @@
 #import "TTLiveAgentWidgetTopicsController.h"
 #import "TTLiveAgentWidgetDataManager.h"
 #import "TTLiveAgentWidgetEmailComposer.h"
-
-/*
- *  System Versioning Preprocessor Macros
- */
-
-#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
-#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+#import "TTLiveAgentWidgetNavigationController.h"
 
 typedef enum : NSUInteger {
-    Push,
-    Present
-} TTLiveAgentWidgetStyle;
+    TTLiveAgentWidgetPresentationStylePush,
+    TTLiveAgentWidgetPresentationStylePresent
+} TTLiveAgentWidgetPresentationStyle;
 
 @interface TTLiveAgentWidget : NSObject
 
-+ (TTLiveAgentWidget*) sharedInstance;
++ (TTLiveAgentWidget *) sharedInstance;
 
 @property (nonatomic, strong) TTLiveAgentWidgetDataManager *dataManager;
 @property (nonatomic, strong) TTLiveAgentWidgetEmailComposer *emailComposer;
@@ -55,7 +46,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) UIColor *tintColor;
 @property (nonatomic, copy) UIColor *navigationBarColor;
 @property (nonatomic, copy) UIColor *titleColor;
-@property UIBarStyle statusBarStyle;
+@property UIStatusBarStyle statusBarStyle;
 
 //
 // Configuration - data manager
@@ -78,7 +69,7 @@ typedef enum : NSUInteger {
 // If data manager has any articles and widget has any topics, then open main widget controller.
 // If the are no topics or articles then open email composer.
 //
-- (void)openFromController:(UIViewController *) controller withStyle:(TTLiveAgentWidgetStyle) style;
+- (void)openFromController:(UIViewController *)controller withPresentationStyle:(TTLiveAgentWidgetPresentationStyle)presentationStyle;
 
 //
 // Secondary function for opening widget.
@@ -86,7 +77,7 @@ typedef enum : NSUInteger {
 // Allows to open topic questions controller by given keyword.
 // If given keyword does not fit any topic act like primary function.
 //
-- (void)openFromController:(UIViewController *) controller forKeyword:(NSString *) keyword withStyle:(TTLiveAgentWidgetStyle) style;
+- (void)openFromController:(UIViewController *)controller forKeyword:(NSString *)keyword withPresentationStyle:(TTLiveAgentWidgetPresentationStyle)presentationStyle;
 
 //
 // Open system Email composer
@@ -96,6 +87,6 @@ typedef enum : NSUInteger {
 //
 // Update articles
 //
-- (void)updateArticles:(void (^)())onSuccess :(void (^)())onError;
+- (void)updateArticlesOnSuccess:(void (^)())onSuccess onError:(void (^)())onError;
 
 @end

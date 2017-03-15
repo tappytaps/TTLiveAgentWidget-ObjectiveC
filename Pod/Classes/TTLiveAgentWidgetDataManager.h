@@ -19,7 +19,7 @@
 @property (nonatomic, copy) NSArray *articles;
 @property (nonatomic, copy) NSString *articleMD5;
 
-- (void)updateArticles:(void (^)())onSuccess :(void (^)())onError;
+- (void)updateArticlesOnSuccess:(void (^)())onSuccess onError:(void (^)())onError;
 - (NSArray *)getArticlesByKeyword:(NSString *)keyword;
 
 @end

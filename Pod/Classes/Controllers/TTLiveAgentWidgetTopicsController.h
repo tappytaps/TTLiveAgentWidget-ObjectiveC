@@ -8,22 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "TTLiveAgentWidget.h"
+#import "TTLiveAgentWidgetSupportTopic.h"
 #import "TTLiveAgentWidgetQuestionsController.h"
-#import "TopicQuestionTableViewCell.h"
 
 @interface TTLiveAgentWidgetTopicsController : UITableViewController
 
-@property (nonatomic, strong) TopicQuestionTableViewCell *prototypeCell;
-
-@property (nonatomic, assign) dispatch_once_t onceLoad;
-
-@property (nonatomic, copy) NSArray *topics;
+@property (nonatomic, copy) NSArray<TTLiveAgentWidgetSupportTopic *> *topics;
 @property (nonatomic, copy) UIColor *tintColor;
 @property (nonatomic, copy) UIColor *barColor;
 @property (nonatomic, copy) UIColor *titleColor;
-@property UIBarStyle barStyle;
-
-@property CGPoint pointNow;
-@property CGFloat contentOffset;
+@property UIStatusBarStyle statusBarStyle;
 
 @end
