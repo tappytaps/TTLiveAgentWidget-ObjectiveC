@@ -3,7 +3,7 @@ TTLiveAgentWidget-ObjectiveC
 
 Live agent widget for iOS written in ObjectiveC.
 
-This widget is not just an email type of support widget. The TTLiveAgentWidget shows knowledgebase articles to users, so they can quickly find a solution for their issue. It works with any live agent server with API version 1. 
+This widget is not just an email type of support widget. The TTLiveAgentWidget shows knowledgebase articles to users, so they can quickly find a solution for their issue. It works with any live agent server with API version 1.
 
 For better performance and security we recommend to use a proxy server. See our proxy server [TTLiveAgentWidget-ProxyServer](https://github.com/tappytaps/TTLiveAgentWidget-ProxyServer).
 
@@ -23,7 +23,7 @@ Or via CocoaPods:
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '6.0'
 
-pod 'TTLiveAgentWidget-ObjectiveC', :git => 'https://github.com/tappytaps/TTLiveAgentWidget-ObjectiveC.git' 
+pod 'TTLiveAgentWidget-ObjectiveC', :git => 'https://github.com/tappytaps/TTLiveAgentWidget-ObjectiveC.git'
 ```
 
 Usage
@@ -47,11 +47,11 @@ liveAgentWidget.supportEmail = @"support@something.com";
 
 // Set topics
 liveAgentWidget.topics = @[
-	[[TTLiveAgentWidgetSupportTopic alloc] initWithKey:@"ios-general" :@"General problem"],
-	[[TTLiveAgentWidgetSupportTopic alloc] initWithKey:@"ios-problem" :@"Specific problem"]
+	[[TTLiveAgentWidgetSupportTopic alloc] initWithKey:@"ios-general" title:@"General problem"],
+	[[TTLiveAgentWidgetSupportTopic alloc] initWithKey:@"ios-problem" title:@"Specific problem"]
 ];
 
-``` 
+```
 
 Best place to config widget is AppDelegate's `didFinishLaunchingWithOptions`. There you should also load new articles from server. So it looks like:
 
@@ -65,11 +65,11 @@ liveAgentWidget.supportEmail = @"support@something.com";
 
 // Set topics
 liveAgentWidget.topics = @[
-	[[TTLiveAgentWidgetSupportTopic alloc] initWithKey:@"ios-general" :@"General problem"],
-	[[TTLiveAgentWidgetSupportTopic alloc] initWithKey:@"ios-problem" :@"Specific problem"]
+	[[TTLiveAgentWidgetSupportTopic alloc] initWithKey:@"ios-general" title:@"General problem"],
+	[[TTLiveAgentWidgetSupportTopic alloc] initWithKey:@"ios-problem" title:@"Specific problem"]
 ];
 
-[liveAgentWidget updateArticles:nil :nil];
+[liveAgentWidget updateArticlesOnSuccess:nil onError:nil];
 ```
 
 Then usage of the widget is simple as:
@@ -79,7 +79,7 @@ Then usage of the widget is simple as:
 TTLiveAgentWidget *liveAgentWidget = [TTLiveAgentWidget sharedInstance];
 
 // Open widget
-[[TTLiveAgentWidget sharedInstance] openFromController:self withStyle:Present];
+[liveAgentWidget openFromController:self withPresentationStyle:TTLiveAgentWidgetPresentationStylePresent];
 ```
 
 Configuration
@@ -97,25 +97,25 @@ On TTLiveAgentWidget you can edit following attributes:
 - `apiFolderId` - live agent folder id with knowledgebase articles
 - `apiLimitArticles` - limit articles from live agent api
 
-If you use `TTLiveAgentWidgetStyle.Present` style (not recommended for `TTLiveAgentWidgetStyle.Push`), you can also configure navigation bar look by these attributes:
+You can also configure navigation bar look by these attributes:
 
 - `tintColor` - navigation bar tint color
 - `navigationBarCollor` - navigation bar background color
 - `titleColor` - navigation bar title color
-- `statusBarStyle` - status bar style (UIBarStyle)
+- `statusBarStyle` - status bar style (UIStatusBarStyle)
 
 API
 ----------
 
-##### - (void)openFromController:(UIViewController *) controller withStyle:(TTLiveAgentWidgetStyle) style;
+##### - (void)openFromController:(UIViewController *)controller withPresentationStyle:(TTLiveAgentWidgetPresentationStyle)presentationStyle;
 
 Open widget from `controller` with style. Style can be either `TTLiveAgentWidgetStyle.Present` (widget will be presented) or `TTLiveAgentWidgetStyle.Push` (widget will be pushed in navigation controller). If `controller` is not embedded in `UINavigationController` you should use `TTLiveAgentWidgetStyle.Present`. If widget has no articles, then widget open email window directly.
 
-##### - (void)openFromController:(UIViewController *) controller forKeyword:(NSString *) keyword withStyle:(TTLiveAgentWidgetStyle) style;
+##### - (void)openFromController:(UIViewController *)controller forKeyword:(NSString *)keyword withPresentationStyle:(TTLiveAgentWidgetPresentationStyle)presentationStyle;
 
-Open knowledgebase articles directly. If `keyword` is not contained in widget's topics then widget will be opened same way as with `- (void)openFromController:(UIViewController *) controller forKeyword:(NSString *) keyword withStyle:(TTLiveAgentWidgetStyle) style`.
+Open knowledgebase articles directly. If `keyword` is not contained in widget's topics then widget will be opened same way as with `- (void)openFromController:(UIViewController *)controller forKeyword:(NSString *)keyword withPresentationStyle:(TTLiveAgentWidgetPresentationStyle)presentationStyle`.
 
-##### - (void)updateArticles:(void (^)())onSuccess :(void (^)())onError;
+##### - (void)updateArticlesOnSuccess:(void (^)())onSuccess onError:(void (^)())onError;
 
 Asynchronously download articles from live agent. You can handle success or error states.
 
