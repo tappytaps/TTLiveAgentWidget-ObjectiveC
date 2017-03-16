@@ -48,11 +48,11 @@
     self.dataManager.apiKey = apiKey;
 }
 
-- (NSNumber *)apiFolderId {
+- (NSString *)apiFolderId {
     return self.dataManager.apiFolderId;
 }
 
-- (void)setApiFolderId:(NSNumber *)apiFolderId {
+- (void)setApiFolderId:(NSString *)apiFolderId {
     self.dataManager.apiFolderId = apiFolderId;
 }
 
@@ -68,7 +68,7 @@
     if (self.topics && self.topics.count > 0 && self.dataManager.articles.count > 0) {
         [self showController:[self createTopicsController] fromController:controller withStyle:presentationStyle];
     } else {
-        [self.emailComposer show:controller withTopic:nil];
+        [self.emailComposer showFromController:controller withTopic:nil];
     }
 }
 
@@ -97,7 +97,7 @@
 }
 
 - (void)openEmailComposerFromController:(UIViewController *)controller withTopic:(TTLiveAgentWidgetSupportTopic *)topic {
-    [self.emailComposer show:controller withTopic:topic];
+    [self.emailComposer showFromController:controller withTopic:topic];
 }
 
 - (void)updateArticlesOnSuccess:(void (^)())onSuccess onError:(void (^)())onError {
@@ -126,7 +126,7 @@
 }
 
 - (TTLiveAgentWidgetQuestionsController*)createQuestionsControllerWithTopic: (TTLiveAgentWidgetSupportTopic *)topic {
-    TTLiveAgentWidgetQuestionsController *lawq = [[[TTLiveAgentWidgetQuestionsController alloc] init] autorelease];
+    TTLiveAgentWidgetQuestionsController *lawq = [[TTLiveAgentWidgetQuestionsController alloc] init];
     lawq.topic = topic;
     lawq.tintColor = self.tintColor;
     lawq.barColor = self.navigationBarColor;

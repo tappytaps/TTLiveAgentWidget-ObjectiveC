@@ -11,7 +11,7 @@
 
 @implementation TTLiveAgentWidgetEmailComposer
 
-- (void)show:(UIViewController *)controller withTopic:(TTLiveAgentWidgetSupportTopic *)topic {
+- (void)showFromController:(UIViewController *)fromController withTopic:(TTLiveAgentWidgetSupportTopic *)topic {
     
     if (![TTLiveAgentWidget sharedInstance].supportEmail) {
         NSLog(@"TTLiveAgentWidget - can't open email composer without support email address.");
@@ -41,31 +41,20 @@
         [mailController setToRecipients:@[emailAddress]];
         [mailController setMessageBody:emailBody isHTML:NO];
         
-        [controller presentViewController:mailController animated:YES completion:nil];
+        [fromController presentViewController:mailController animated:YES completion:nil];
         
     } else {
-        NSLog(@"TTLiveAgentWidget - can not send email");
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Email is not configured on your iOS device", @"") message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"") style:UIAlertActionStyleCancel handler:nil]];
+        
+        [fromController presentViewController:alert animated:YES completion:nil];
+        
     }
     
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    switch (result) {
-        case MFMailComposeResultCancelled:
-            NSLog(@"Mail cancelled");
-            break;
-        case MFMailComposeResultSaved:
-            NSLog(@"Mail saved");
-            break;
-        case MFMailComposeResultSent:
-            NSLog(@"Mail sent");
-            break;
-        case MFMailComposeResultFailed:
-            NSLog(@"Mail sent failure: %@", error.localizedDescription);
-            break;
-        default:
-            break;
-    }
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 

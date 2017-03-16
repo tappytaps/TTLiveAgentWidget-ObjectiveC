@@ -159,11 +159,7 @@ NSString * const kLAIconCellIdentifier = @"TTLiveAgentWidgetIconCell";
 
         NSBundle *bundle = [NSBundle bundleForClass:[TTLiveAgentWidgetQuestionsController class]];
 
-        cell.imageView.image = [[UIImage imageNamed:@"ic_email" inBundle:bundle compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-
-        if (self.tintColor) {
-            cell.imageView.tintColor = self.tintColor;
-        }
+        cell.imageView.image = [UIImage imageNamed:@"ic_email" inBundle:bundle compatibleWithTraitCollection:nil];
 
         cell.textLabel.text = NSLocalizedString(@"Send email to support", "Send support email table view row.");
 

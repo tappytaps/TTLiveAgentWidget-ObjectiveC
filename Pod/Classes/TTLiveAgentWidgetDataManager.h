@@ -13,7 +13,7 @@
 
 @property (nonatomic, copy) NSString *apiURL;
 @property (nonatomic, copy) NSString *apiKey;
-@property (nonatomic, copy) NSNumber *apiFolderId;
+@property (nonatomic, copy) NSString *apiFolderId;
 @property (nonatomic, copy) NSNumber *apiLimitArticles;
 
 @property (nonatomic, copy) NSArray *articles;

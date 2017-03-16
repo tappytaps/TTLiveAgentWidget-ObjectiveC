@@ -12,6 +12,6 @@
 
 @interface TTLiveAgentWidgetEmailComposer : NSObject <MFMailComposeViewControllerDelegate>
 
-- (void)show:(UIViewController *) controller withTopic:(TTLiveAgentWidgetSupportTopic *) topic;
+- (void)showFromController:(UIViewController *)fromController withTopic:(TTLiveAgentWidgetSupportTopic *)topic;
 
 @end
