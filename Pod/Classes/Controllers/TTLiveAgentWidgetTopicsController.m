@@ -77,6 +77,10 @@ NSString * const kLATopicCellIdentifier = @"TTLiveAgentWidgetArticleCell";
     return self.statusBarStyle;
 }
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

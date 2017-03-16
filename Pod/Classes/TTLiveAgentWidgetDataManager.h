@@ -20,6 +20,8 @@
 @property (nonatomic, copy) NSString *articleMD5;
 
 - (void)updateArticlesOnSuccess:(void (^)())onSuccess onError:(void (^)())onError;
-- (NSArray *)getArticlesByKeyword:(NSString *)keyword;
+
+- (NSArray<TTLiveAgentWidgetSupportArticle *> *)getArticlesByKeyword:(NSString *)keyword;
+- (NSArray<TTLiveAgentWidgetSupportArticle *> *)getArticlesByKeyword:(NSString *)keyword orderBy:(NSArray<NSSortDescriptor *> *)sortDescriptors;
 
 @end

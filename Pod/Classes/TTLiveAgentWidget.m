@@ -65,7 +65,7 @@
 }
 
 - (void)openFromController:(UIViewController *)controller withPresentationStyle:(TTLiveAgentWidgetPresentationStyle)presentationStyle {
-    if (self.topics != nil && self.topics.count > 0 && self.dataManager.articles.count > 0) {
+    if (self.topics && self.topics.count > 0 && self.dataManager.articles.count > 0) {
         [self showController:[self createTopicsController] fromController:controller withStyle:presentationStyle];
     } else {
         [self.emailComposer show:controller withTopic:nil];
