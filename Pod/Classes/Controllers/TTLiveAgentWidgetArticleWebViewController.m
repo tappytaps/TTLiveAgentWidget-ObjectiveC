@@ -74,7 +74,8 @@
     
     self.imageView = [[UIImageView alloc] init];
     self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.imageView.image = [UIImage imageNamed:@"ic_question" inBundle:bundle compatibleWithTraitCollection:nil];
+    self.imageView.image = [[UIImage imageNamed:@"ic_question" inBundle:bundle compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.imageView.tintColor = [TTLiveAgentWidget sharedInstance].iconsColor;
     
     self.label = [[UILabel alloc] init];
     self.label.translatesAutoresizingMaskIntoConstraints = NO;
@@ -117,12 +118,23 @@
     // <meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1; minimum-scale=1;'/>
     // <img src='http://lorempixel.com/400/200' />
     
-    NSString *htmlString = [NSString stringWithFormat:@"<html><head><meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1.0;'><style>*{line-height:1.33;-webkit-text-size-adjust: none;}html{overflow-x: hidden;}body{overflow-x: hidden;padding: 0; margin: 0; font-family: '%@';}a,a:link,a:visited{color: rgb(0,114,225) !important;}</style></head><body><div style='font-size: 15px; color: rgba(0,0,0,0.5);}'>%@</div></body></html>", bodyFont.fontName, content];
+    NSString *htmlString = [NSString stringWithFormat:@"<html><head><meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1.0;'><style>*{line-height:1.33;-webkit-text-size-adjust: none;}html{overflow-x: hidden;}body{overflow-x: hidden;padding: 0; margin: 0; font-family: '%@';}a,a:link,a:visited{color: %@ !important;}</style></head><body><div style='font-size: 15px; color: rgba(0,0,0,0.5);}'>%@</div></body></html>", bodyFont.fontName, [self hexFromUIColor:[TTLiveAgentWidget sharedInstance].iconsColor], content];
     
     self.label.text = title;
     
     [self.webView loadHTMLString:htmlString baseURL:nil];
     
+}
+
+- (NSString *)hexFromUIColor:(UIColor *)color {
+    if (CGColorGetNumberOfComponents(color.CGColor) < 4) {
+        const CGFloat *components = CGColorGetComponents(color.CGColor);
+        color = [UIColor colorWithRed:components[0] green:components[0] blue:components[0] alpha:components[1]];
+    }
+    if (CGColorSpaceGetModel(CGColorGetColorSpace(color.CGColor)) != kCGColorSpaceModelRGB) {
+        return [NSString stringWithFormat:@"#000"];
+    }
+    return [NSString stringWithFormat:@"#%02X%02X%02X", (int)((CGColorGetComponents(color.CGColor))[0]*255.0), (int)((CGColorGetComponents(color.CGColor))[1]*255.0), (int)((CGColorGetComponents(color.CGColor))[2]*255.0)];
 }
 
 - (void)startObservingHeight {

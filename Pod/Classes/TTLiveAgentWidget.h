@@ -46,6 +46,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) UIColor *tintColor;
 @property (nonatomic, copy) UIColor *navigationBarColor;
 @property (nonatomic, copy) UIColor *titleColor;
+@property (nonatomic, copy) UIColor *iconsColor;
 @property UIStatusBarStyle statusBarStyle;
 
 //

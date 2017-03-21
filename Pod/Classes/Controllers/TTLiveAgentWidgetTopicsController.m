@@ -130,7 +130,8 @@ NSString * const kLATopicCellIdentifier = @"TTLiveAgentWidgetArticleCell";
     
     NSBundle *bundle = [NSBundle bundleForClass:[TTLiveAgentWidgetTopicsController class]];
     
-    cell.imageView.image = [UIImage imageNamed:@"ic_topic" inBundle:bundle compatibleWithTraitCollection:nil];
+    cell.imageView.image = [[UIImage imageNamed:@"ic_topic" inBundle:bundle compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    cell.imageView.tintColor = [TTLiveAgentWidget sharedInstance].iconsColor;
     cell.textLabel.text = topic.title;
     cell.textLabel.numberOfLines = 0;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

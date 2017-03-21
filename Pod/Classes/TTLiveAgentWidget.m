@@ -27,6 +27,7 @@
         self.dataManager = [[TTLiveAgentWidgetDataManager alloc] init];
         self.emailComposer = [[TTLiveAgentWidgetEmailComposer alloc] init];
         self.maxArticlesCount = 50;
+        self.iconsColor = [UIColor colorWithRed:0.0 green:114.0/255 blue:1.0 alpha:1.0];
     }
 
     return self;

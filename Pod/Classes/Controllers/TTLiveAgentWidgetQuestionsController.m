@@ -159,8 +159,9 @@ NSString * const kLAIconCellIdentifier = @"TTLiveAgentWidgetIconCell";
 
         NSBundle *bundle = [NSBundle bundleForClass:[TTLiveAgentWidgetQuestionsController class]];
 
-        cell.imageView.image = [UIImage imageNamed:@"ic_email" inBundle:bundle compatibleWithTraitCollection:nil];
-
+        cell.imageView.image = [[UIImage imageNamed:@"ic_email" inBundle:bundle compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        cell.imageView.tintColor = [TTLiveAgentWidget sharedInstance].iconsColor;
+        
         cell.textLabel.text = NSLocalizedString(@"Send email to support", "Send support email table view row.");
 
         return cell;
@@ -173,7 +174,8 @@ NSString * const kLAIconCellIdentifier = @"TTLiveAgentWidgetIconCell";
 
     NSBundle *bundle = [NSBundle bundleForClass:[TTLiveAgentWidgetQuestionsController class]];
 
-    cell.imageView.image = [UIImage imageNamed:@"ic_question" inBundle:bundle compatibleWithTraitCollection:nil];
+    cell.imageView.image = [[UIImage imageNamed:@"ic_question" inBundle:bundle compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    cell.imageView.tintColor = [TTLiveAgentWidget sharedInstance].iconsColor;
     cell.textLabel.text = article.title;
     cell.textLabel.numberOfLines = 0;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
