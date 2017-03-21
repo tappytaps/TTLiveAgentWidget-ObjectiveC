@@ -87,7 +87,7 @@
     self.webView.opaque = NO;
     self.webView.scrollView.scrollEnabled = NO;
     self.webView.backgroundColor = [UIColor whiteColor];
-    
+
     [self.contentView addSubview:self.imageView];
     [self.contentView addSubview:self.label];
     [self.contentView addSubview:self.webView];
@@ -95,7 +95,7 @@
     [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:24].active = YES;
     [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:24].active = YES;
     [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0 constant:17].active = YES;
-    [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:17].active = YES;
+    [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:19].active = YES;
     
     [NSLayoutConstraint constraintWithItem:self.label attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.imageView attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:15].active = YES;
     [NSLayoutConstraint constraintWithItem:self.label attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0 constant:18].active = YES;
@@ -117,7 +117,7 @@
     // <meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1; minimum-scale=1;'/>
     // <img src='http://lorempixel.com/400/200' />
     
-    NSString *htmlString = [NSString stringWithFormat:@"<html><head><meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1.0;'></head><body><style>*{line-height:1.33;-webkit-text-size-adjust: none;}html{overflow-x: hidden;}body{overflow-x: hidden;padding: 0; margin: 0; font-family: '%@';}</style><div style='font-size: 15px; color: rgba(0,0,0,0.5);'>%@</div></body></html>", bodyFont.fontName, content];
+    NSString *htmlString = [NSString stringWithFormat:@"<html><head><meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1.0;'><style>*{line-height:1.33;-webkit-text-size-adjust: none;}html{overflow-x: hidden;}body{overflow-x: hidden;padding: 0; margin: 0; font-family: '%@';}a,a:link,a:visited{color: rgb(0,114,225) !important;}</style></head><body><div style='font-size: 15px; color: rgba(0,0,0,0.5);}'>%@</div></body></html>", bodyFont.fontName, content];
     
     self.label.text = title;
     
