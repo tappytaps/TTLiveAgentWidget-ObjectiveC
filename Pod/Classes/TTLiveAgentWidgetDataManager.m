@@ -105,7 +105,7 @@ NSString * const kArticlesKeyIdentifier = @"com.tappytaps.support.widget.article
 
                         if (title && content && keywords) {
                             TTLiveAgentWidgetSupportArticle *article = [[TTLiveAgentWidgetSupportArticle alloc] init];
-                            article.title = title;
+                            article.title = [title stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
                             article.content = content;
                             article.keywords = keywords;
 
