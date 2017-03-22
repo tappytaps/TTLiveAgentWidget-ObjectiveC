@@ -191,6 +191,10 @@ NSString * const kArticlesKeyIdentifier = @"com.tappytaps.support.widget.article
 
 - (NSArray<TTLiveAgentWidgetSupportArticle *> *)getArticlesByKeyword:(NSString *)keyword orderBy:(NSArray<NSSortDescriptor *> *)sortDescriptors {
     
+    if (keyword == nil) {
+        return @[];
+    }
+    
     NSMutableArray *articles = [NSMutableArray array];
     
     NSArray *storedArticles = self.articles;
