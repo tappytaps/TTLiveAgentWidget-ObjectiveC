@@ -27,7 +27,11 @@
 - (void)loadView {
     CGRect appFrame = [UIScreen mainScreen].applicationFrame;
     UIView *contentView = [[UIView alloc] initWithFrame:appFrame];
-    contentView.backgroundColor = [UIColor whiteColor];
+    if (@available(iOS 13.0, *)) {
+        contentView.backgroundColor = [UIColor systemBackgroundColor];
+    } else {
+        contentView.backgroundColor = [UIColor whiteColor];
+    }
     self.view = contentView;
 }
 
@@ -87,7 +91,7 @@
     self.webView.delegate = self;
     self.webView.opaque = NO;
     self.webView.scrollView.scrollEnabled = NO;
-    self.webView.backgroundColor = [UIColor whiteColor];
+    self.webView.backgroundColor = [UIColor clearColor];
 
     [self.contentView addSubview:self.imageView];
     [self.contentView addSubview:self.label];
@@ -109,21 +113,38 @@
     
     self.webViewHeightConstraint = [NSLayoutConstraint constraintWithItem:self.webView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:1.0];
     self.webViewHeightConstraint.active = YES;
-
-    NSString *content = self.article.content;
-    NSString *title = self.article.title;
     
-    UIFont *bodyFont = [UIFont systemFontOfSize:15.0];
+    self.label.text = self.article.title;
+    
+    [self renderBody];
+}
+
+- (void)renderBody {
+    NSString *content = self.article.content;
+    
+    UIColor *bodyColor;
+    
+    if (@available(iOS 13.0, *)) {
+        bodyColor = [UIColor secondaryLabelColor];
+    } else {
+        bodyColor = [UIColor colorWithWhite:0 alpha:0.5];
+    }
     
     // <meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1; minimum-scale=1;'/>
     // <img src='http://lorempixel.com/400/200' />
     
-    NSString *htmlString = [NSString stringWithFormat:@"<html><head><meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1.0;'><style>*{line-height:1.33;-webkit-text-size-adjust: none;}html{overflow-x: hidden;}body{overflow-x: hidden;padding: 0; margin: 0; font-family: '%@';}a,a:link,a:visited{color: %@ !important;}</style></head><body><div style='font-size: 15px; color: rgba(0,0,0,0.5);}'>%@</div></body></html>", bodyFont.fontName, [self hexFromUIColor:[TTLiveAgentWidget sharedInstance].iconsColor], content];
-    
-    self.label.text = title;
+    NSString *htmlString = [NSString stringWithFormat:@"<html><head><meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1.0;'><style>*{line-height:1.33;-webkit-text-size-adjust: none;}html{overflow-x: hidden;}body{overflow-x: hidden;padding: 0; margin: 0; font-family: '-apple-system';}a,a:link,a:visited{color: %@ !important;}</style></head><body><div style='font-size: 15px; color: %@;}'>%@</div></body></html>", [self hexFromUIColor:[TTLiveAgentWidget sharedInstance].iconsColor], [self hexFromUIColor:bodyColor], content];
     
     [self.webView loadHTMLString:htmlString baseURL:nil];
-    
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    if (@available(iOS 13.0, *)) {
+        if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
+            [self renderBody];
+        }
+    }
 }
 
 - (NSString *)hexFromUIColor:(UIColor *)color {
@@ -179,6 +200,7 @@
 }
 
 - (void)dealloc {
+    [super dealloc];
     [self stopObservingHeight];
 }
 
